@@ -1,1 +1,23 @@
 # anotações para passar para o caderno
+
+é possível fazer tratamentos no "except:" informando os tipos de erro, por exemplo ZeroDivisionError ou NameError
+se for omitido o tipo de erro, ou informado o Exception, o tratamento funcionará para qualquer erro que surgir
+
+para o uso de pacotes que não estão no python por padrão, pode-se utilizar a ferramenta pip para a instalação
+
+para requisições web, utilizar a biblioteca "requests"
+headers da requisição devem ser enviados como dictionary
+
+para a conversão de json para dictionary, pode ser utilizado a função "json.loads()", da biblioteca "json"
+
+para tratamento com expressões regulares, pode-se utilizar a biblioteca "re"
+
+API de cotações: https://docs.awesomeapi.com.br/api-de-moedas
+
+API CEP: https://viacep.com.br/
+
+API Clima: https://openweathermap.org/api
+
+Para autenticação em APIs, utilizar a biblioteca oauth2
+
+Criação de bibliotecas deve ser feito com a criação de classes no arquivo python, com a definição das funções dentro da classe
