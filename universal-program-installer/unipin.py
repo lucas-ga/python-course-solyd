@@ -8,24 +8,37 @@ import os
 import shutil
 import sys
 
+from sympy.physics.units import action
+
 APPLICATIONS_DIR = '/usr/share/applications/'
 
 if os.getuid() != 0:
     print("This script needs to be run as root (use sudo).")
     sys.exit(1)
 
+os.system('clear')
+
+print("""
+  _   _               _        ___     ___            
+ | | | |   _ _       (_)      | _ \   |_ _|    _ _    
+ | |_| |  | ' \      | |      |  _/    | |    | ' \   
+  \___/   |_||_|    _|_|_    _|_|_    |___|   |_||_|  
+_|\"\"\"\"\"| _|\"\"\"\"\"| _|\"\"\"\"\"| _| \"\"\" | _|\"\"\"\"\"| _|\"\"\"\"\"| 
+"`-0-0-' "`-0-0-' "`-0-0-' "`-0-0-' "`-0-0-' "`-0-0-' 
+
+[ Universal Program Installer ]
+""")
 
 parser = argparse.ArgumentParser(
     prog='Unipin',
     description='Script created to help with programs instalation',
-    epilog='O menu de ajuda é exibido automaticamente no caso de erro na leitura dos parâmetros',
     usage='unipin[.py] [options] [-d /path/to/file] filename',
     allow_abbrev=False
 )
 
 parser.add_argument('filename')
 parser.add_argument('-b','--basic',default=False, help='Only add shortcut to menu', required=False, action='store_true')
-parser.add_argument('-d','--directory',help='directory with program files', required=False, action='store')
+parser.add_argument('-d','--directory', help='Directory with program files', required=False, default=os.getcwd())
 parser.add_argument('--no-path',default=False, help='Don\'t add program to Path', required=False, action='store_true')
 parser.add_argument('--no-icon',default=False, help='Don\'t add icon to program',required=False, action='store_true')
 parser.add_argument('-v','--version',action='version',version='%(prog)s 1.0')
@@ -46,8 +59,8 @@ icon_path = ''
 categorias_str = ''
 file_path = ''
 if not basic:
-    pgm_name = input('Qual será o nome do programa?')
-    pgm_desc = input('Informe a descrição do programa')
+    pgm_name = input('Qual será o nome do programa? ')
+    pgm_desc = input('Informe a descrição do programa: ')
     if not dict_args.get('no_icon'):
         img_extensions = ['png', 'jpg', 'jpeg', 'bmp', 'gif']
         img_files = {}
@@ -66,6 +79,7 @@ if not basic:
         icon = input('Selecione o icone:')
         if icon != '0':
             icon_path = img_files[int(icon)][0]
+        os.system('clear')
         categories = [
             "AudioVideo", "Development", "Education", "Game", "Graphics", "Network",
             "Office", "Science", "Settings", "System", "Utility", "Audio", "Video",
@@ -82,6 +96,8 @@ if not basic:
             categorias_str = ";".join(categorias_selecionadas) + ";"
 
 config_file = APPLICATIONS_DIR + filename + '.desktop'
+
+os.system('clear')
 
 # copia os arquivos para o diretório novo
 dest_dir = f'/usr/share/{pgm_name}'
